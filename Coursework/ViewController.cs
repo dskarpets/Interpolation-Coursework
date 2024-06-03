@@ -17,6 +17,7 @@ namespace Coursework
         private NSTextField functionInput;
 
         private List<Tuple<double, double>> points = new List<Tuple<double, double>>();
+        private List<Tuple<double, double>> pointsToWrite = new List<Tuple<double, double>>();
 
         private NSTextField[] xFields;
         private NSTextField[] yFields;
@@ -82,6 +83,8 @@ namespace Coursework
             }
 
             points.AddRange(newPoints);
+            pointsToWrite.Clear();
+            pointsToWrite.AddRange(newPoints);
 
             Tuple<string, string> tuple = PerformInterpolation();
 
@@ -96,6 +99,7 @@ namespace Coursework
             }
 
             points.Clear();
+
         }
 
         private Tuple<string, string> PerformInterpolation()
@@ -135,6 +139,7 @@ namespace Coursework
             polynomialTextField.StringValue = "";
             practicalComplexityTextField.StringValue = "";
             points.Clear();
+            pointsToWrite.Clear();
             plotView.Model.Series.Clear();
 
         }
@@ -154,7 +159,7 @@ namespace Coursework
                     using (StreamWriter writer = new StreamWriter(filePath))
                     {
                         writer.WriteLine("Точки:");
-                        foreach (var point in points)
+                        foreach (var point in pointsToWrite)
                         {
                             writer.WriteLine(point);
                         }

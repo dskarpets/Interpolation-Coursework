@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using MathNet.Symbolics;
 using Expr = MathNet.Symbolics.Expression;
 
@@ -12,6 +13,12 @@ namespace Coursework
 
         public static string CalculateInterpolation(List<Tuple<double, double>> points)
         {
+
+            if (points.All(point => point.Item2 == 0))
+            {
+                return "0";
+            }
+
             var x = Expr.Symbol("x");
             var polynomial = Expr.Zero;
             const double tolerance = 1e-10;

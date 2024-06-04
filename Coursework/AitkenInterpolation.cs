@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using MathNet.Symbolics;
 using Expr = MathNet.Symbolics.Expression;
 
@@ -12,6 +13,12 @@ namespace Coursework
 
         public static string CalculateInterpolation(List<Tuple<double, double>> points)
         {
+
+            if (points.All(point => point.Item2 == 0))
+            {
+                return "0";
+            }
+
             var x = Expr.Symbol("x");
             int n = points.Count;
             var P = new Dictionary<string, Expr>();

@@ -64,8 +64,8 @@ namespace Coursework
                     return;
                 }
 
-                x = Math.Round(x, 3);
-                y = Math.Round(y, 3);
+                x = Math.Round(x, 5);
+                y = Math.Round(y, 5);
 
                 if (newPoints.Any(point => point.Item1 == x) || points.Any(point => point.Item1 == x))
                 {

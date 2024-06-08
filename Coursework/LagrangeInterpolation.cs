@@ -13,12 +13,6 @@ namespace Coursework
 
         public static string CalculateInterpolation(List<Tuple<double, double>> points)
         {
-
-            if (points.All(point => point.Item2 == 0))
-            {
-                return "0";
-            }
-
             var x = Expr.Symbol("x");
             var polynomial = Expr.Zero;
             const double tolerance = 1e-10;
@@ -42,6 +36,11 @@ namespace Coursework
             var polynomialString = Infix.Format(simplifiedPolynomial);
 
             var filteredPolynomialString = FilterAndRoundCoefficients(polynomialString, tolerance);
+
+            if (points.All(point => point.Item2 == 0))
+            {
+                return "0";
+            }
 
             return filteredPolynomialString;
         }
@@ -85,7 +84,7 @@ namespace Coursework
                                 includeTerm = false;
                                 break;
                             }
-                            roundedParts.Add(Math.Round(coefficient, 3).ToString(CultureInfo.InvariantCulture));
+                            roundedParts.Add(Math.Round(coefficient, 5).ToString(CultureInfo.InvariantCulture));
                         }
                         else
                         {
@@ -103,13 +102,13 @@ namespace Coursework
                     {
                         if (Math.Abs(constant) >= tolerance)
                         {
-                            filteredTerms.Add(Math.Round(constant, 3).ToString(CultureInfo.InvariantCulture));
+                            filteredTerms.Add(Math.Round(constant, 5).ToString(CultureInfo.InvariantCulture));
                         }
                     }
                 }
             }
 
-            return string.Join(" + ", filteredTerms).Replace("+-", " - ");
+            return string.Join(" + ", filteredTerms).Replace("+ -", " - ");
         }
 
     }

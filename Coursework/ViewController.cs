@@ -102,6 +102,31 @@ namespace Coursework
 
         }
 
+        partial void generateSystemButton(NSObject sender)
+        {
+            var random = new Random();
+            var number = (int)systemSize.IndexOfSelectedItem + 2;
+            var newPoints = new List<Tuple<double, double>>();
+
+            points.Clear();
+
+            for (int i = 0; i < number; i++)
+            {
+                int x = random.Next(-1000, 1000);
+                double y = Math.Round(random.NextDouble() * 2000 - 1000, 3);
+
+                newPoints.Add(new Tuple<double, double>(x, y));
+            }
+
+            UpdateTextFieldVisibility(number);
+
+            for (int i = 0; i < number; i++)
+            {
+                GetXField(i).StringValue = newPoints[i].Item1.ToString();
+                GetYField(i).StringValue = newPoints[i].Item2.ToString();
+            }
+        }
+
         private Tuple<string, string> PerformInterpolation()
         {
             

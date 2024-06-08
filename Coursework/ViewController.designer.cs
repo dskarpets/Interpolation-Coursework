@@ -90,6 +90,9 @@ namespace Coursework
 		[Action ("clearFieldsButton:")]
 		partial void clearFieldsButton (Foundation.NSObject sender);
 
+		[Action ("generateSystemButton:")]
+		partial void generateSystemButton (Foundation.NSObject sender);
+
 		[Action ("saveToFileButton:")]
 		partial void saveToFileButton (Foundation.NSObject sender);
 		
